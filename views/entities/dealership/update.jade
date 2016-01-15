@@ -1,0 +1,39 @@
+extends ../../layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  - var dealer = data
+
+  form(method='post', action='/dealerships/edit')
+    fieldset
+      legend Dealership
+      input(name='ID', type='hidden', value= dealer.ID)
+      p Owner
+      p
+        input(name='Owner', value= dealer.Owner)
+      p Label
+      p
+        input(name='Label', value= dealer.Label)
+    fieldset
+      legend Address
+      input(name='AddressID', type='hidden', value= dealer.AddressID)
+      p Street
+      p
+        input(name='Street', value= dealer.Street)
+      p City
+      p
+        input(name='City', value= dealer.City)
+      p State
+      p
+        input(name='State', value= dealer.State)
+      p Zip
+      p
+        input(name='Zip', value= dealer.Zip)
+      p Country
+      p
+        input(name='Country', value= dealer.Country)
+        
+    p
+      input(type='submit', value='Save')

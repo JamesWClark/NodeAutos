@@ -1,0 +1,27 @@
+extends ../../layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  - var dealer = data
+  
+  table
+    tr
+      th ID
+      th Owner
+      th Label
+      th Street
+      th City
+      th State
+      th Zip
+      th Country
+    tr
+      td= dealer.ID
+      td= dealer.Owner
+      td= dealer.Label
+      td= dealer.Street
+      td= dealer.City
+      td= dealer.State
+      td= dealer.Zip
+      td= dealer.Country

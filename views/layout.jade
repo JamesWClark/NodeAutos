@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    - links = ['Customers','Dealerships','Employees','Sales']
+    ul
+    - each link in links
+      li
+        a(href= '/' + link)= link
+    block content

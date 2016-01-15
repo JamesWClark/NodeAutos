@@ -1,0 +1,35 @@
+extends ../../layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form(method='post', action='/dealerships')
+    fieldset
+      legend Dealership
+      p Owner
+      p
+        input(name='Owner')
+      p Label
+      p
+        input(name='Label')
+    fieldset
+      legend Address
+      p Street
+      p
+        input(name='Street')
+      p City
+      p
+        input(name='City')
+      p State
+      p
+        input(name='State')
+      p Zip
+      p
+        input(name='Zip')
+      p Country
+      p
+        input(name='Country')
+        
+    p
+      input(type='submit', value='Save')
