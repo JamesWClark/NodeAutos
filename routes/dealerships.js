@@ -9,45 +9,33 @@ var db = new TransactionDatabase(engine);
 
 engine.exec("PRAGMA foreign_keys = ON");
 
-/* GET all dealerships - home page. */
+/* GET read */
 router.get('/', function(req, res, next) {
   db.all("SELECT * FROM Dealership", function(err,rows){
-    console.log('dealership rows fetched: ' + rows.length);
+    console.log('SQL - SELECT ' + rows.length + ' rows');
     res.render('entities/dealership/index', { title: 'Dealerships', data: rows });
   });
 });
 
-/* GET one dealership and address */
+/* GET create */
+router.get('/create', function(req,res,next) {
+  res.render('entities/dealership/create', { title: 'New Dealership' });
+});
+
+/* GET update */
 router.get('/:id', function(req,res,next) {
   var id = req.params.id;
   db.all("SELECT * " +
          "FROM Dealership JOIN Address ON Dealership.AddressID = Address.ID " +
          "WHERE Dealership.ID = " + id, 
   function(err, rows) {
-    console.log('one dealership fetched, id = ' + id);
+    console.log('SQL - SELECT');
+    console.log(JSON.stringify(rows[0]));
     res.render('entities/dealership/update', { title: rows[0].Owner, data: rows[0] });
   });
 });
 
-/* GET form - create dealership */
-router.get('/forms/create', function(req,res,next) {
-  res.render('entities/dealership/create', { title: 'New Dealership' });
-});
-
-/* GET form - edit dealership */
-router.get('/forms/edit/:id', function(req,res,next) {
-  var id = req.params.id;
-  db.all("SELECT * " + 
-         "FROM Dealership JOIN Address ON Dealership.AddressID = Address.ID " +
-         "WHERE Dealership.ID = " + id, 
-         
-  function(err,rows) {
-    console.log('fetch dealership with id = ' + id + ', found: ' + rows.length);
-    res.render('entities/dealership/edit', { title: 'Edit Dealership', data: rows[0] });
-  });
-});
-
-/* POST new Dealership */
+/* POST create */
 router.post('/', function(req,res,next){
   var data = req.body;
 
@@ -81,13 +69,14 @@ router.post('/', function(req,res,next){
     });    
   });
   
-  res.send(req.body);
+  res.redirect('/dealerships');
 });
 
+/* POST update */
 router.post('/edit', function(req,res,next) {
   var data = req.body;
-  console.log('received update request on dealership\n--------------------------');
-  console.log('id = ' + data.id);
+  console.log('POST - UPDATE');
+  console.log(JSON.stringify(data));
   
   // Begin a transaction.
   // http://stackoverflow.com/questions/28803520/does-sqlite3-have-prepared-statements-in-node-js
