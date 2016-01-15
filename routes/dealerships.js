@@ -25,7 +25,7 @@ router.get('/:id', function(req,res,next) {
          "WHERE Dealership.ID = " + id, 
   function(err, rows) {
     console.log('one dealership fetched, id = ' + id);
-    res.render('entities/dealership/single', { title: rows[0].Owner, data: rows[0] });
+    res.render('entities/dealership/update', { title: rows[0].Owner, data: rows[0] });
   });
 });
 
@@ -121,7 +121,7 @@ router.post('/edit', function(req,res,next) {
     });    
   });
   
-  res.send(req.body);
+  res.redirect('/dealerships');
 });
 
 module.exports = router;

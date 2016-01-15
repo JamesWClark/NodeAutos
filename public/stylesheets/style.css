@@ -1,8 +1,25 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
 }
 
-a {
-  color: #00B7FF;
+
+tr:nth-child(even) {
+  background-color: #E9E7E2;
 }
+
+tr:nth-child(odd) {
+  background-color: #D5D3CA;
+}
+
+th {
+  background-color: #4A411B;
+  color: #FFF;
+}
+
+tr:hover {
+  background-color: #E0E0F8;
+  cursor: pointer;
+}
+
+/* http://stackoverflow.com/questions/1460958/html-table-row-like-a-link */
